@@ -7,7 +7,7 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "payments.devmountain.com"
+host: "http://104.248.178.153/payment"
 basePath: "/payment"
 tags:
   - name: "key"
@@ -17,18 +17,18 @@ tags:
   - name: "refunds"
     description: "Refunding transactions"
 schemes:
-- "https"
-- "http"
+  - "https"
+  - "http"
 paths:
   /key:
     get:
       tags:
-      - "key"
+        - "key"
       summary: "Request an API key to interact with the other API endpoints"
       description: ""
       operationId: "getKey"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         200:
           description: "successful"
@@ -38,18 +38,18 @@ paths:
   /transactions:
     get:
       tags:
-      - "transactions"
+        - "transactions"
       summary: "Retreives all transactions for a given application"
       description: ""
       operationId: "getTransactions"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "key"
-        in: "query"
-        type: "string"
-        description: "API key"
-        required: true
+        - name: "key"
+          in: "query"
+          type: "string"
+          description: "API key"
+          required: true
       responses:
         200:
           description: "successful operation"
@@ -64,21 +64,21 @@ paths:
             example: "This request requires an API key"
     post:
       tags:
-      - "transactions"
+        - "transactions"
       summary: "Add a new transaction"
       description: ""
       operationId: "addTransaction"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Object with all properties of the new transaction. Amount must be string (no commas allowed) or floating point decimal. Card number must be 16 digits but may be separated by hyphens if desired. Expiration must be a future date in MM/YY format. CVC should be the 3-4 digit number on the back of the card in string or integer format. Currency should be the currency of the transaction; only usd is currently supported."
-        required: true
-        schema:
-          $ref: "#/definitions/TransactionBody"
+        - in: "body"
+          name: "body"
+          description: "Object with all properties of the new transaction. Amount must be string (no commas allowed) or floating point decimal. Card number must be 16 digits but may be separated by hyphens if desired. Expiration must be a future date in MM/YY format. CVC should be the 3-4 digit number on the back of the card in string or integer format. Currency should be the currency of the transaction; only usd is currently supported."
+          required: true
+          schema:
+            $ref: "#/definitions/TransactionBody"
       responses:
         200:
           description: "successful operation"
@@ -93,25 +93,25 @@ paths:
             example: "This request requires an API key"
   /refund/{transactionId}:
     put:
-      tags: 
+      tags:
         - "refunds"
       summary: "Refunds the given transaction by its ID"
       description: ""
       operationId: "refund"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "key"
-        in: "query"
-        type: "string"
-        description: "API key"
-        required: true
-      - name: "transactionId"
-        in: "path"
-        description: "ID of transaction to be refunded"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "key"
+          in: "query"
+          type: "string"
+          description: "API key"
+          required: true
+        - name: "transactionId"
+          in: "path"
+          description: "ID of transaction to be refunded"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -177,18 +177,15 @@ definitions:
       amount:
         type: "string"
         example: "24.99"
-      cardNumber: 
+      cardNumber:
         type: "string"
         example: "4242424242424242"
-      exp: 
+      exp:
         type: "string"
         example: "04/22"
       cvc:
         type: "string"
         example: "535"
-      currency: 
+      currency:
         type: "string"
         example: "usd"
- 
-        
-  
