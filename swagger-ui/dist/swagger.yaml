@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "This is an example payment API"
+  description: "This is an example payment API. Request an API key from the /key endpoint. All other endpoints require the key to be sent as a query string parameter for authorization. No bank accounts will be harmed during the course of your learning."
   version: "1.0.0"
   title: "DevMountain Payment API"
   termsOfService: "http://swagger.io/terms/"
