@@ -7,7 +7,7 @@ module.exports = {
     getApiKey: (req, res) => {
         let apiKey = getRandomKey().split('-')[0];
         transactions[apiKey] = [];
-        return res.send({apiKey})
+        return res.send({key: apiKey})
     },
 
     requireApiKey: (req, res, next) => {
