@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: "This is an example payment API"
   version: "1.0.0"
-  title: "DevMountain Products"
+  title: "DevMountain Payment API"
   termsOfService: "http://swagger.io/terms/"
   license:
     name: "Apache 2.0"
@@ -17,7 +17,6 @@ tags:
   - name: "refunds"
     description: "Refunding transactions"
 schemes:
-  - "https"
   - "http"
 paths:
   /key:
