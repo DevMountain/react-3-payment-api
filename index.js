@@ -7,8 +7,8 @@ const app = express()
 app.use(express.json())
 app.use(morgan('dev'))
 
-app.use(express.static(path.join(__dirname, '../swagger-ui/dist')))
-app.use('/payment', express.static(path.join(__dirname, '../swagger-ui/dist')))
+app.use(express.static(path.join(__dirname, './swagger-ui/dist')))
+app.use('/payment', express.static(path.join(__dirname, './swagger-ui/dist')))
 
 app.get('/payment/key', ctrl.getApiKey)
 
