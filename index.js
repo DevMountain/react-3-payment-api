@@ -10,7 +10,6 @@ app.use(morgan('dev'))
 app.use(cors())
 
 app.use(express.static(path.join(__dirname, './swagger-ui/dist')))
-app.use('/payment', express.static(path.join(__dirname, './swagger-ui/dist')))
 
 app.get('/payment/key', ctrl.getApiKey)
 

@@ -1,191 +1,191 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "This is an example payment API"
-  version: "1.0.0"
-  title: "DevMountain Products"
-  termsOfService: "http://swagger.io/terms/"
+  description: 'This is an example payment API'
+  version: '1.0.0'
+  title: 'DevMountain Products'
+  termsOfService: 'http://swagger.io/terms/'
   license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "http://104.248.178.153"
-basePath: "/api"
+    name: 'Apache 2.0'
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: 'https://r3payments.devmountain.com'
+basePath: '/api'
 tags:
-  - name: "key"
-    description: "Obtain API key"
-  - name: "transactions"
-    description: "Adding and retreiving transaction data"
-  - name: "refunds"
-    description: "Refunding transactions"
+  - name: 'key'
+    description: 'Obtain API key'
+  - name: 'transactions'
+    description: 'Adding and retreiving transaction data'
+  - name: 'refunds'
+    description: 'Refunding transactions'
 schemes:
-  - "https"
-  - "http"
+  - 'https'
+  - 'http'
 paths:
   /key:
     get:
       tags:
-        - "key"
-      summary: "Request an API key to interact with the other API endpoints"
-      description: ""
-      operationId: "getKey"
+        - 'key'
+      summary: 'Request an API key to interact with the other API endpoints'
+      description: ''
+      operationId: 'getKey'
       produces:
-        - "application/json"
+        - 'application/json'
       responses:
         200:
-          description: "successful"
+          description: 'successful'
           schema:
-            type: "object"
-            $ref: "#/definitions/Key"
+            type: 'object'
+            $ref: '#/definitions/Key'
   /transactions:
     get:
       tags:
-        - "transactions"
-      summary: "Retreives all transactions for a given application"
-      description: ""
-      operationId: "getTransactions"
+        - 'transactions'
+      summary: 'Retreives all transactions for a given application'
+      description: ''
+      operationId: 'getTransactions'
       produces:
-        - "application/json"
+        - 'application/json'
       parameters:
-        - name: "key"
-          in: "query"
-          type: "string"
-          description: "API key"
+        - name: 'key'
+          in: 'query'
+          type: 'string'
+          description: 'API key'
           required: true
       responses:
         200:
-          description: "successful operation"
+          description: 'successful operation'
           schema:
-            type: "array"
+            type: 'array'
             items:
-              $ref: "#/definitions/Transaction"
+              $ref: '#/definitions/Transaction'
         401:
-          description: "No API key found"
+          description: 'No API key found'
           schema:
-            type: "string"
-            example: "This request requires an API key"
+            type: 'string'
+            example: 'This request requires an API key'
     post:
       tags:
-        - "transactions"
-      summary: "Add a new transaction"
-      description: ""
-      operationId: "addTransaction"
+        - 'transactions'
+      summary: 'Add a new transaction'
+      description: ''
+      operationId: 'addTransaction'
       consumes:
-        - "application/json"
+        - 'application/json'
       produces:
-        - "application/json"
+        - 'application/json'
       parameters:
-        - in: "body"
-          name: "body"
-          description: "Object with all properties of the new transaction. Amount must be string (no commas allowed) or floating point decimal. Card number must be 16 digits but may be separated by hyphens if desired. Expiration must be a future date in MM/YY format. CVC should be the 3-4 digit number on the back of the card in string or integer format. Currency should be the currency of the transaction; only usd is currently supported."
+        - in: 'body'
+          name: 'body'
+          description: 'Object with all properties of the new transaction. Amount must be string (no commas allowed) or floating point decimal. Card number must be 16 digits but may be separated by hyphens if desired. Expiration must be a future date in MM/YY format. CVC should be the 3-4 digit number on the back of the card in string or integer format. Currency should be the currency of the transaction; only usd is currently supported.'
           required: true
           schema:
-            $ref: "#/definitions/TransactionBody"
+            $ref: '#/definitions/TransactionBody'
       responses:
         200:
-          description: "successful operation"
+          description: 'successful operation'
           schema:
-            $ref: "#/definitions/RefundedTransaction"
+            $ref: '#/definitions/RefundedTransaction'
         400:
-          description: "Required property missing off of request body,  Or a property is in an invalid format."
+          description: 'Required property missing off of request body,  Or a property is in an invalid format.'
         401:
-          description: "No API key found"
+          description: 'No API key found'
           schema:
-            type: "string"
-            example: "This request requires an API key"
+            type: 'string'
+            example: 'This request requires an API key'
   /refund/{transactionId}:
     put:
       tags:
-        - "refunds"
-      summary: "Refunds the given transaction by its ID"
-      description: ""
-      operationId: "refund"
+        - 'refunds'
+      summary: 'Refunds the given transaction by its ID'
+      description: ''
+      operationId: 'refund'
       produces:
-        - "application/json"
+        - 'application/json'
       parameters:
-        - name: "key"
-          in: "query"
-          type: "string"
-          description: "API key"
+        - name: 'key'
+          in: 'query'
+          type: 'string'
+          description: 'API key'
           required: true
-        - name: "transactionId"
-          in: "path"
-          description: "ID of transaction to be refunded"
+        - name: 'transactionId'
+          in: 'path'
+          description: 'ID of transaction to be refunded'
           required: true
-          type: "integer"
-          format: "int64"
+          type: 'integer'
+          format: 'int64'
       responses:
         200:
-          description: "successful operation"
+          description: 'successful operation'
           schema:
-            $ref: "#/definitions/RefundedTransaction"
+            $ref: '#/definitions/RefundedTransaction'
         401:
-          description: "No API key found"
+          description: 'No API key found'
           schema:
-            type: "string"
-            example: "This request requires an API key"
+            type: 'string'
+            example: 'This request requires an API key'
 definitions:
   Key:
-    type: "object"
+    type: 'object'
     properties:
       key:
-        type: "string"
-        example: "4f7f61fd"
+        type: 'string'
+        example: '4f7f61fd'
   Transaction:
-    type: "object"
+    type: 'object'
     properties:
       id:
-        type: "integer"
+        type: 'integer'
         example: 1
       status:
-        type: "string"
-        example: "cleared"
+        type: 'string'
+        example: 'cleared'
       currency:
-        type: "string"
-        example: "usd"
+        type: 'string'
+        example: 'usd'
       amount:
-        type: "number"
-        example: "24.99"
+        type: 'number'
+        example: '24.99'
       fee:
-        type: "string"
-        example: "1.02"
+        type: 'string'
+        example: '1.02'
       net:
-        type: "string"
-        example: "23.97"
+        type: 'string'
+        example: '23.97'
   RefundedTransaction:
-    type: "object"
+    type: 'object'
     properties:
       id:
-        type: "integer"
+        type: 'integer'
         example: 1
       status:
-        type: "string"
-        example: "refunded"
+        type: 'string'
+        example: 'refunded'
       currency:
-        type: "string"
-        example: "usd"
+        type: 'string'
+        example: 'usd'
       amount:
-        type: "number"
-        example: "24.99"
+        type: 'number'
+        example: '24.99'
       fee:
-        type: "string"
-        example: "0.00"
+        type: 'string'
+        example: '0.00'
       net:
-        type: "string"
-        example: "0.00"
+        type: 'string'
+        example: '0.00'
   TransactionBody:
-    type: "object"
+    type: 'object'
     properties:
       amount:
-        type: "string"
-        example: "24.99"
+        type: 'string'
+        example: '24.99'
       cardNumber:
-        type: "string"
-        example: "4242424242424242"
+        type: 'string'
+        example: '4242424242424242'
       exp:
-        type: "string"
-        example: "04/22"
+        type: 'string'
+        example: '04/22'
       cvc:
-        type: "string"
-        example: "535"
+        type: 'string'
+        example: '535'
       currency:
-        type: "string"
-        example: "usd"
+        type: 'string'
+        example: 'usd'
