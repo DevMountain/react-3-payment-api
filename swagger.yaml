@@ -7,7 +7,7 @@ info:
   license:
     name: 'Apache 2.0'
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-host: 'https://r3payments.devmountain.com'
+host: 'r3payments.devmountain.com'
 basePath: '/api'
 tags:
   - name: 'key'
